@@ -19,10 +19,9 @@ const App = () => {
     const [image_index, setImageIndex] = useState(0) // 设置图片显示index
 
     const readPhoto = e => {
-        setImageList([])
         try {
             const files = e.target.files
-            console.log(files)
+            if(files.length != 0) setImageList([])
             for (let i = 0; i < files.length; i++ ) {
                 // 提取文件名字
                 const reg = /(.*)\.(.*)/
