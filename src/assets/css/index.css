@@ -1,0 +1,45 @@
+body {
+    height: 100%;
+}
+
+.content-wrapper{
+    display: flex;
+    justify-content:space-around;
+}
+
+#mobile-phone{
+    width: 300px;
+    height: 600px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-top: 20px;
+}
+
+
+.shoot-photo {
+    width: 88%;
+    height: 77%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 12%;
+    left: 6%;
+}
+
+.right{
+    margin-right:120px;
+    margin-top:190px;
+}
+
+.tip{
+    font-size: 23px;
+    margin-right: 15px;
+}
+
+#upload-photo {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
