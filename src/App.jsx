@@ -18,10 +18,12 @@ const App = () => {
     const [name_list, setNameList] = useState([])
     const [image_index, setImageIndex] = useState(0) // 设置图片显示index
 
+    const [loading, setLoading] = useState(false); // 避免按钮被点击太多次
+
     const readPhoto = e => {
         try {
             const files = e.target.files
-            if(files.length != 0) setImageList([])
+            if(files.length !== 0) setImageList([])
             for (let i = 0; i < files.length; i++ ) {
                 // 提取文件名字
                 const reg = /(.*)\.(.*)/
@@ -54,6 +56,7 @@ const App = () => {
         // 异步生成zip，成功后下载zip
         zip.generateAsync({ type: 'blob' }).then((zipFile) =>{
             saveAs(zipFile, '手机图片.zip')
+            setLoading(false);
         });
     };
 
@@ -69,6 +72,7 @@ const App = () => {
         const blobs = []
         let index = 0
         setImageIndex(0)
+        setLoading(true)
         let timer = setInterval(()=>{
             if(index >= image_list.length) {
                 exportZip(blobs)
@@ -119,7 +123,7 @@ const App = () => {
                     <Button type="primary" icon={<DownloadOutlined />}  onClick={getSingleBlobPng} size="large">
                         Download
                     </Button>
-                    <Button type="primary" icon={<DownloadOutlined />}  onClick={getAllBlobPng} size="large">
+                    <Button type="primary" icon={<DownloadOutlined />}  onClick={getAllBlobPng} size="large" loading={loading}>
                         Download All
                     </Button>
                 </Space>
