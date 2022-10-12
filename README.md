@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+## 简介
+这是一个基于 react 构建的项目， 先 npm i 安装所有的依赖包， 然后再 npm start 打开项目即可
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+这个项目的作用 给图片加上手机壳， 主要的来源灵感在于 之前写报告的时候 这种加上手机壳的操作 都是使用ppt, 一张一张来进行处理的， 非常麻烦
 
-## Available Scripts
+## 基本页面
+![image](https://user-images.githubusercontent.com/78332649/195230853-91c7e1e9-a0fa-4556-bb5a-7c2ab634848e.png)
 
-In the project directory, you can run:
+# 切换手机外壳颜色
+然后 第一个是选择 color的 单选框， 可以自由切换黑色或者白色的外壳
+![image](https://user-images.githubusercontent.com/78332649/195230906-97230a65-897e-4d07-babf-d56d20e74cf9.png)
 
-### `npm start`
+### 选择上传图片
+upload picture的话， 就是上传图片， 这里可以选择一到多张图片
+![image](https://user-images.githubusercontent.com/78332649/195230571-d055ad29-fe50-49f8-a070-d1e852962868.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+上传完图片之后 下面会出现 选择图片的分类器， 可以自由切换自己想看的
+![image](https://user-images.githubusercontent.com/78332649/195230725-c2cdb9a0-ed22-49ed-ba77-4d41982bfc5b.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 下载
+点击 Download, 表示下载当前图片（即左侧的手机图片）
+![image](https://user-images.githubusercontent.com/78332649/195231271-ca21abe0-2f9f-47f6-be1c-3bc494eee633.png)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+点击 DownloadAll, 表示 下载所有上传的带手机外壳的图片
+![image](https://user-images.githubusercontent.com/78332649/195231411-e548fb17-5dd4-4398-afce-14a075c29513.png)
