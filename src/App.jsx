@@ -80,14 +80,17 @@ const App = () => {
                 timer = null
                 return
             }
+
+
             domtoimage.toBlob(node).then((blob) => {
-                console.log('blob: ', blob)
-                blobs.push(blob)
-                setImageIndex(current=>{
-                    if(current < name_list.length - 1) { return current + 1}
+                setImageIndex(current=>{ 
+                    blobs.push(blob)
+                    index++
+                    if(current < name_list.length - 1) {
+                        return current + 1
+                    }
                     return current
                 })
-                index++
             })
         },500)
     }
