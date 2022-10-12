@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
@@ -19,6 +19,9 @@ const App = () => {
     const [image_index, setImageIndex] = useState(0) // 设置图片显示index
 
     const [loading, setLoading] = useState(false); // 避免按钮被点击太多次
+
+    const inputRef = useRef(null)
+    const phoneRef = useRef(null)
 
     const readPhoto = e => {
         try {
@@ -61,14 +64,16 @@ const App = () => {
     };
 
     const getSingleBlobPng = () => {
-        const node = document.getElementById("node");
+        //const node = document.getElementById("node");
+        const node = phoneRef.current
         domtoimage.toBlob(node).then((blob) => {
             saveAs(blob, `${name_list[image_index]}.png`)
         })
     }
 
     const getAllBlobPng = () => {
-        const node = document.getElementById("node");
+        //const node = document.getElementById("node");
+        const node = phoneRef.current
         const blobs = []
         let index = 0
         setImageIndex(0)
@@ -96,13 +101,14 @@ const App = () => {
     }
 
     const uploadFiles = () => {
-        const input = document.getElementById('upload-photo')
-        input.click()
+        //const input = document.getElementById('upload-photo')
+        //input.click()
+        inputRef.current.click()
     }
 
     return (
         <div className = "content-wrapper">
-            <div id="node">
+            <div id="node" ref={phoneRef}>
                 <div id="mobile-phone" style={{backgroundImage: 'url(' + border_image_list[border] + ')'}}>
                     <div className="shoot-photo" style={{backgroundImage: 'url(' + image_list[image_index] + ')'}}/>
                 </div>
@@ -118,7 +124,7 @@ const App = () => {
                 
 
                 <Button type="primary" icon={<UploadOutlined/>} size="large" onClick={uploadFiles} style={{marginTop:40 + 'px'}}>
-                    <input id="upload-photo" type='file' multiple="multiple" onChange={readPhoto}/>
+                    <input id="upload-photo" type='file' multiple="multiple" onChange={readPhoto} ref={inputRef}/>
                     <span>Upload Picture</span>
                 </Button>
 
