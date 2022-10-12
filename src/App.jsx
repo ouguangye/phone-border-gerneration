@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { useState } from "react";
+import { useEffect } from "react"
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
-import JsZip from 'jszip'
+import JsZip from 'jszip';
 
 import { DownloadOutlined, UploadOutlined} from '@ant-design/icons';
 import { Button, Pagination, Space, Radio} from 'antd';
@@ -17,11 +18,22 @@ const App = () => {
     const [image_list, setImageList] = useState([])
     const [name_list, setNameList] = useState([])
     const [image_index, setImageIndex] = useState(0) // 设置图片显示index
-
-    const [loading, setLoading] = useState(false); // 避免按钮被点击太多次
+    const [blobs, setBlobs] = useState([])
+    const [loading, setLoading] = useState(false); // 避免downLoading 按钮被点击太多次
 
     const inputRef = useRef(null)
     const phoneRef = useRef(null)
+
+    useEffect(()=>{
+        if(!loading) return
+        if(image_index === image_list.length) {
+            setImageIndex(0)
+            setLoading(false)
+            exportZip(blobs)
+            return
+        }
+        cutPhoto()
+    }, [image_index])
 
     const readPhoto = e => {
         try {
@@ -44,27 +56,11 @@ const App = () => {
           } 
     }
 
-    // 最终导出zip
-    const exportZip = (res) => {
-        // 创建zip实例
-        const zip = JsZip();
-
-        console.log(res)
-
-        // 向zip中添加文件（二进制文件流）
-        res.forEach((item, index) => {
-            zip.file(`${name_list[index]}.png`, item);
-        });
-
-        // 异步生成zip，成功后下载zip
-        zip.generateAsync({ type: 'blob' }).then((zipFile) =>{
-            saveAs(zipFile, '手机图片.zip')
-            setLoading(false);
-        });
-    };
+    const uploadFiles = () => {
+        inputRef.current.click()
+    }
 
     const getSingleBlobPng = () => {
-        //const node = document.getElementById("node");
         const node = phoneRef.current
         domtoimage.toBlob(node).then((blob) => {
             saveAs(blob, `${name_list[image_index]}.png`)
@@ -72,39 +68,34 @@ const App = () => {
     }
 
     const getAllBlobPng = () => {
-        //const node = document.getElementById("node");
-        const node = phoneRef.current
-        const blobs = []
-        let index = 0
         setImageIndex(0)
         setLoading(true)
-        let timer = setInterval(()=>{
-            if(index >= image_list.length) {
-                exportZip(blobs)
-                clearInterval(timer)
-                timer = null
-                return
-            }
-
-
-            domtoimage.toBlob(node).then((blob) => {
-                setImageIndex(current=>{ 
-                    blobs.push(blob)
-                    index++
-                    if(current < name_list.length - 1) {
-                        return current + 1
-                    }
-                    return current
-                })
-            })
-        },500)
+        setBlobs([])
+        cutPhoto()
     }
 
-    const uploadFiles = () => {
-        //const input = document.getElementById('upload-photo')
-        //input.click()
-        inputRef.current.click()
-    }
+    const cutPhoto = () => {
+        domtoimage.toBlob(phoneRef.current).then((blob) => {
+            console.log('entering')
+            setBlobs(current=>[...current, blob])  
+            setImageIndex(current=> current + 1)
+        })
+    } 
+
+    // 最终导出zip
+    const exportZip = (res) => {
+        const zip = JsZip();
+        console.log(res)
+        // 向zip中添加文件（二进制文件流）
+        res.forEach((item, index) => {
+            zip.file(`${name_list[index]}.png`, item);
+        });
+        // 异步生成zip，成功后下载zip
+        zip.generateAsync({ type: 'blob' }).then((zipFile) =>{
+            saveAs(zipFile, 'images.zip')
+            setLoading(false);
+        });
+    };
 
     return (
         <div className = "content-wrapper">
