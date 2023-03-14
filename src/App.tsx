@@ -106,6 +106,7 @@ const App = () => {
         zip.generateAsync({ type: 'blob' }).then((zipFile) =>{
             saveAs(zipFile, 'images.zip')
             setLoading(false);
+            setBlobs([])
         });
     };
 
